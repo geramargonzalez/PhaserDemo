@@ -6,9 +6,10 @@ demo.state0.prototype = {
   preload: function(){},
   create:  function(){
     juego.stage.backgroundColor = '#80ffd4';
-    juego.input.keyboard.addKey(Phaser.Keyboard.ONE).onDown.add(cambiarEstado,null,null,1);
+    //juego.input.keyboard.addKey(Phaser.Keyboard.ONE).onDown.add(cambiarEstado,null,null,1);
     //juego.input.keyboard.addKey(Phaser.Keyboard.TWO).onDown.add(cambiarEstado,null,null,2);
     addChangeStateListeners();
+    juego.scale.scaleMode = Phaser.ScaleManager.SHOW_All;
 
   },
   update: function(){}
