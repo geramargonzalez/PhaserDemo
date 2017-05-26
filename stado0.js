@@ -9,8 +9,9 @@ demo.state0 = function (){}
 
 demo.state0.prototype = {
   preload: function(){
-    juego.load.image('adam','assets/sprites/adam.png');
+    //juego.load.image('adam','assets/sprites/adam.png');
     juego.load.image('tree','assets/backgrounds/treeBG.png');
+    juego.load.spritesheet('adam','assets/spritesheets/adamSheet.png',240,370);
   },
   create:  function(){
     juego.physics.startSystem(Phaser.Physics.ARCADE);
@@ -26,9 +27,13 @@ demo.state0.prototype = {
     //adam.anchor.y = 0.5;
     adam.anchor.setTo(0.5,0.5);
     adam.scale.setTo(0.7,0.7);
+
+
     juego.camera.follow(adam);
     juego.physics.enable(adam);
+
     adam.body.collideWorldBounds = true;
+    adam.animations.add("walk",[0,1,2,3,4]);
     juego.camera.deadzone = new Phaser.Rectangle(centerx-300,0,600,1000);
 
   },
@@ -37,25 +42,32 @@ demo.state0.prototype = {
     {
         adam.x += speed;
         adam.scale.setTo(0.7,0.7);
+        adam.animations.play("walk",14,true);
         //ufo.angle = -15;
     }
     else if (juego.input.keyboard.isDown(Phaser.Keyboard.LEFT))
     {
         adam.x -= speed;
         adam.scale.setTo(-0.7,0.7);
+        adam.animations.play("walk",14,true);
       //  ufo.angle = 15;
+    } else {
+        adam.animations.stop("walk");
+        adam.frame = 0;
     }
+
     if (juego.input.keyboard.isDown(Phaser.Keyboard.DOWN))
     {
         adam.y += speed;
+          adam.animations.play("walk",14,true);
 
         //ufo.angle = -15;
     }
     else if (juego.input.keyboard.isDown(Phaser.Keyboard.UP))
     {
-
         if(adam.y > 381.79999999999995){
           adam.y -= speed;
+            adam.animations.play("walk",14,true);
         }
       //  ufo.angle = 15;
     }
